@@ -1,0 +1,301 @@
+* {
+    padding: 0; 
+    margin: 0; 
+    box-sizing: border-box; 
+    text-decoration: none; 
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideDown { from { transform: translateY(-100%); } to { transform: translateY(0); } }
+@keyframes slide { from { opacity: 0; transform: translateX(100%); } to { opacity: 1; transform: translateX(0); } }
+@keyframes slideRight { from { opacity: 0; transform: translateX(-100%); } to { opacity: 1; transform: translateX(0); } }
+@keyframes opening{
+	0% {transform: scale(0); }
+	50% {transform: scale(1.1); }
+	100% {transform: scale(1); }
+}
+@keyframes jump { 
+    0% { transform: translateY(20%); opacity: 0; } 
+    50% { transform: translateY(-10%); opacity: 1; } 
+    100% { transform: translateY(0); opacity: 1; } 
+}
+@keyframes rotate{ from{ transform: rotateX(90deg); }to { transform: rotateX(0); } }
+
+:root { --theme: #4c8576; }
+
+a { color: white; }
+h1 { font-size: 2.8rem; margin-bottom: 10px; }
+p { font-size: 1.2rem; margin-bottom: 40px; line-height: 30px; }
+
+body { 
+    font-family: 'popins', sans-serif; 
+    overflow-x: hidden; 
+    color: white; 
+    animation: fadeIn 1s cubic-bezier(0.19, 1, 0.22, 1); 
+}
+
+section { 
+    background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url(./pictures/bg.jpg) no-repeat center; 
+    background-size: cover; 
+    height: 100dvh; 
+}
+header h1{ 
+    margin: 10px;
+    background: linear-gradient(to right, var(--theme), #fff);
+    background-clip: text;
+    color: transparent;
+    font-family: garamond;
+    opacity: 0.8;
+}
+header { 
+    width: 100%; 
+    padding: 15px 40px; 
+    display: flex; 
+    justify-content: space-between; 
+    position: absolute; 
+    top: 0; 
+    animation: slideDown 1s cubic-bezier(0.19, 1, 0.22, 1); 
+}
+nav { 
+    display: flex; 
+    margin: 10px 0; 
+    gap: 40px; 
+    align-items: center; 
+}
+
+nav a { 
+    color: transparent; 
+    background: linear-gradient(to right, var(--theme) 50%, white 50%) 100% 0 / 200%; 
+    background-clip: text; 
+    transition: scale 0.3s, background 0.5s; 
+    scale: 1.15; 
+}
+
+nav a:hover { 
+    background-position: 0 0; 
+    scale: 1.25; 
+}
+
+.btn-ctn {
+    all: unset; 
+    padding: 15px 35px; 
+    border-radius: 5px; 
+    background-color: var(--theme); 
+    transition: 0.25s cubic-bezier(0.19, 1, 0.22, 1); 
+    cursor: pointer; 
+}
+
+.btn-ctn:hover { 
+    filter: brightness(110%); 
+    color: white; 
+}
+
+.btn-ctn:active { scale: 1.2 0.45; }
+
+.active { 
+    color: rgba(255, 255, 255, 0.5); 
+    background: none; 
+}
+
+.active:hover { 
+    color: rgba(255, 255, 255, 0.5); 
+    scale: 1.15; 
+}
+
+.content { 
+    height: 100vh; 
+    display: flex; 
+    align-items: center; 
+    margin-left: 100px; 
+    max-width: 800px; 
+    animation: slide 1.5s ease; 
+}
+.content-details * {
+    animation: slide 1s ease; 
+    animation-delay: calc(var(--i) * 100ms);
+}
+
+.about, .gallery { 
+    display: grid; 
+    align-items: center; 
+    justify-items: center; 
+    grid-template-columns: 50% 50%; 
+    padding: 20px; 
+    gap: 10px; 
+}
+
+.gallery { 
+    transform: translateY(30px); 
+    height: fit-content; 
+}
+
+.about-details { 
+    max-width: 500px; 
+    text-align: justify; 
+    animation: slideRight 1s; 
+}
+.about-details * {
+    animation: slideRight 1s; 
+    animation-delay: calc(var(--i) * 100ms);
+}
+
+.gallery img { 
+    width: 300px; 
+    height: 230px; 
+    animation: slide 1s cubic-bezier(0.19, 1, 0.22, 1); 
+}
+
+img.img { height: 150px; width: auto; }
+img.fir { align-self: self-end; justify-self: self-start; }
+img.sec { align-self: baseline; justify-self: flex-end; }
+
+.services { text-align: center; padding-top: 90px; }
+
+.service-details { 
+    display: grid; 
+    grid-template-columns: repeat(3, 350px); 
+    gap: 30px; 
+    justify-content: center; 
+}
+
+.s1 { 
+    cursor: pointer; 
+    border-radius: 10px; 
+    height: 320px; 
+    position: relative; 
+    overflow: hidden; 
+    opacity: 0; 
+    border: 3px solid white; 
+    animation: jump 1.5s ease forwards; 
+    animation-delay: calc(var(--i) * 0.2s); 
+}
+
+.s1 img { 
+    height: 100%; 
+    border-radius: 10px; 
+    scale: 1.15; 
+    transition: 0.3s linear; 
+    animation: fadeIn 1s; 
+}
+
+.imgcap { 
+    position: absolute; 
+    top: 100%; 
+    padding: 20px; 
+    height: 100%; 
+    background-color: rgba(76, 155, 148, 0.644); 
+    backdrop-filter: blur(0); 
+    border-radius: 10px; 
+    transition: 0.5s linear; 
+}
+
+.s1:hover > .imgcap { 
+    top: 0; 
+    backdrop-filter: blur(5px); 
+}
+
+.s1:hover > img { scale: 1; }
+
+.contact { 
+    display: grid; 
+    padding-top: 70px; 
+    grid-template-columns: 45% 55%; 
+}
+
+.contact-details { 
+    text-align: center; 
+    width: 400px; 
+    height: fit-content; 
+    margin-left: 80px; 
+    align-self: center; 
+    scale: 1.15; 
+    animation: slideRight 1s cubic-bezier(0.19, 1, 0.22, 1); 
+}
+
+fieldset { 
+    padding: 30px; 
+    border: none; 
+    border-left: 2px solid #fff; 
+    margin-bottom: 10px; 
+}
+
+input, textarea { 
+    padding: 8px; 
+    margin: 10px 15px; 
+    height: 45px; 
+    width: 80%; 
+    font-size: 1.1rem; 
+    color: #fff; 
+    outline: none; 
+    border-radius: 5px; 
+    background-color: #ffffff18; 
+    border: none; 
+    transition: 0.125s linear; 
+    animation: slide 0.5s ease forwards; 
+    animation-delay: calc(var(--i) * 0.15s); 
+}
+
+fieldset * { opacity: 0; }
+
+input:focus, input:valid, textarea:focus, textarea:valid { border: 3px solid white; }
+
+::placeholder { color: #f1e9e9a6; }
+
+input[type=submit] { 
+    cursor: pointer; 
+    transition: 0.25s linear; 
+    border: none; 
+}
+
+input[type=submit]:hover { 
+    background-color: #fff; 
+    color: #2b2828; 
+}
+
+textarea { height: 100px; resize: none; }
+
+.login-container { 
+    height: 100dvh; 
+    display: flex; 
+    justify-content: center; 
+    text-align: center; 
+    color: white; 
+}
+
+h2 { 
+    margin-bottom: 20px; 
+    font-size: 30px; 
+}
+
+span { 
+    display: inline-block; 
+    text-align: start; 
+    width: 80%; 
+}
+
+.login-form { 
+    width: 500px; 
+    position: absolute; 
+    top: 25%; 
+    background-color: #fff2; 
+    backdrop-filter: blur(5px); 
+    border-radius: 10px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+    padding-top: 50px; 
+	animation: opening 1.5s ease forwards;
+}
+.tt{
+	color: var(--theme);
+}
+input[type=checkbox]{
+	height: 15px;
+	width: 15px;
+	margin: 0 2px;
+	accent-color: var(--theme);
+}
+.log *{
+    transform: rotateX(90deg);
+    animation: rotate 0.75s ease-in;
+    animation-fill-mode: forwards;
+    animation-delay: calc(var(--i) * 100ms);
+}
